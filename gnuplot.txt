@@ -1,0 +1,13 @@
+set terminal jpeg size 1024, 768
+set output 'u/pm100x100.jpg'
+set grid
+set xrange [0:100]
+set yrange [0:100]
+set zrange [0:1.]
+set xlabel 'x'
+set ylabel 't'
+set zlabel 'u (x, t)'
+set xtics ('' 0, ''1)
+set ytics ('' 0, ''1)
+set palette defined (0 "dark-turquoise", 1 "yellow")
+splot 'data_u.txt' matrix with pm3d
