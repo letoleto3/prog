@@ -12,9 +12,11 @@
 
 #define EPS 10e-16
 
-#define DRAW3D 0
+#define DRAW3D 1
 #define PM3D 0
-#define COS 0
+#define COS 1
+
+#define SCHEME 0
 
 struct task_parametrs
 {
