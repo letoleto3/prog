@@ -88,16 +88,22 @@ int main (int argc, char *argv[])
         }
       fprintf (fp_u, "\n");
       fclose (fp_u);
-
+#if COS
+      draw ("u-cos", filename_com, it_t);
+#else
       draw ("u", filename_com, it_t);
+#endif
 #endif
     }
 
 #if DRAW3D
   fprintf (fp_u, "\n");
   fclose (fp_u);
-
+#if COS
+  draw ("u-cos", filename_com, it_t);
+#else
   draw ("u", filename_com, it_t);
+#endif
   my_sleep (1e-3);
 #endif
 
