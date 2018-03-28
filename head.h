@@ -14,7 +14,7 @@
 
 #define DRAW3D 1
 #define PM3D 1
-#define COS 0
+#define COS 1
 
 struct task_parametrs
 {
