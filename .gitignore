@@ -1,0 +1,12 @@
+data_u.txt
+*.o
+Make*
+make
+Makefile
+*.pro.user*
+*.pdf
+*.aux
+*.toc
+*.log
+*.out
+gnuplot.txt
