@@ -58,7 +58,7 @@ void draw (const char *parametr, const char *file_name, int it_t)
   fprintf (fp, "set grid x y\n");
   fprintf (fp, "set xrange [0:1]\n");
   fprintf (fp, "set yrange [0:1.]\n");
-  fprintf (fp, "plot 'data_%s.txt' using 1:3 with lines%c", parametr, '\0');
+  fprintf (fp, "plot 'data_u.txt' using 1:3 with lines%c", '\0');
 #endif
 
   fclose (fp);
