@@ -1,2 +1,3 @@
-!data_u.txt
-!gnuplot.txt
+data_u.txt
+gnuplot.txt
+*.o
