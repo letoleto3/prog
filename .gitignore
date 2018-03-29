@@ -10,3 +10,5 @@ Makefile
 *.log
 *.out
 gnuplot.txt
+.DS*
+*.gz
