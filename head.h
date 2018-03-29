@@ -5,11 +5,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
-
-#define DRAW3D 1
-#define PM3D 0
-#define COS 0
-#define SCHEME 0
+#include "options.h"
 
 #define LEN 500
 #define DEN 2
