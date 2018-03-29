@@ -10,7 +10,6 @@ int scheme (task_parametrs *p_g, scheme_parametrs *p_s, double *u, double *works
   double *arr = workspace;
   double *vect = arr + 3 * (M + 1);
   double *work = vect + M + 1;
-(void) work;
 
 #if SCHEME
   fill_matrix_u (p_g, p_s, arr);
@@ -26,6 +25,9 @@ int scheme (task_parametrs *p_g, scheme_parametrs *p_s, double *u, double *works
   return 0;
 #else
 
+  (void) work;
+  (void) it_t;
+  (void) p_g;
   double h = p_s->h;
   double gamma = p_s->tau / h;
   for (int i = 0; i < M; i++)
