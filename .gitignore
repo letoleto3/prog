@@ -12,3 +12,4 @@ Makefile
 gnuplot.txt
 .DS*
 *.gz
+*.kate-swp
