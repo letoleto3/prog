@@ -13,6 +13,8 @@
 
 #define EPS 10e-16
 
+#define RESIDUAL 1
+
 struct task_parametrs
 {
   double Segm_T;
@@ -86,7 +88,9 @@ int scheme (task_parametrs *p_g,
 
 
 void print_table_begin (FILE **fp);
+void print_table_begin (FILE **fp, const char *param, const char *norm, double h);
 void print_table (FILE **fp, double t, double mass);
+void print_table (FILE **fp, double *norm, scheme_parametrs *p_s);
 void print_table_end (FILE **fp);
 
 #define LEN_BUF 256
@@ -95,5 +99,4 @@ void reprint_table (FILE **from, FILE **to);
 void end_print_norms (FILE **fp);
 
 void draw (const char *parametr, const char *file_name, int it_t);
-
 #endif // HEAD_H

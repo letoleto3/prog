@@ -11,7 +11,7 @@ int scheme (task_parametrs *p_g, scheme_parametrs *p_s, double *u, double *works
   double *vect = arr + 3 * (M + 1);
   double *work = vect + M + 1;
 
-#if SCHEME
+#if SCHEME || RESIDUAL
   fill_matrix_u (p_g, p_s, arr);
   fill_rhs_u (p_g, p_s, vect, u, it_t);
 
@@ -100,31 +100,13 @@ void draw (const char *parametr, const char *file_name, int it_t)
 }
 
 
-void print_table_begin (FILE **fp)
+void calculate_u (task_parametrs *p_g, scheme_parametrs *p_s, double *val_u)
 {
-  fprintf (*fp, "\\documentclass[a4paper,12pt]{article}\n");
-  fprintf (*fp, "\\usepackage[english,russian]{babel}\n");
-  fprintf (*fp, "\\usepackage[utf8]{inputenc}\n");
-  fprintf (*fp, "\\usepackage{amsmath, amsfonts,amssymb}\n");
-  fprintf (*fp, "\\usepackage{longtable}\n");
+  double t = p_g->Segm_T;
+  double h = p_s->h;
+  double (*f_u)(double, double) = p_g->u_0;
+  int M = p_s->M;
 
-  fprintf (*fp, "\\begin{document}\n");
-  fprintf (*fp, "\\begin{center}\n");
-  fprintf (*fp, "\\begin{longtable}{|c|c|}\n");
-  fprintf (*fp, "\\hline\n");
-  fprintf (*fp, "$t$ & $m$ \\\\ \n");
-}
-
-void print_table (FILE **fp, double t, double mass)
-{
-  fprintf (*fp, "\\hline\n");
-  fprintf (*fp, "%.6f & %.6f \\\\ \n", t, mass);
-}
-
-void print_table_end (FILE **fp)
-{
-  fprintf (*fp, "\\hline\n");
-  fprintf (*fp, "\\end{longtable}\n");
-  fprintf (*fp, "\\end{center}\n");
-  fprintf (*fp, "\\end{document}\n");
+  for (int m = 0; m <= M; m++)
+    val_u[m] = f_u (m * h, t);
 }

@@ -49,7 +49,7 @@ void fill_rhs_u (task_parametrs *p_g,
     {
       vect[m] = -u[m]
           - tau * u[m] * u[m] * u[m]
-#if COS
+#if COS || RESIDUAL
           + tau * f1 (m * h, tau * it_t);
 #else
           ;
