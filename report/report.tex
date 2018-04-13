@@ -55,12 +55,12 @@
 \Large Механико-математический факультет \\ \end{center}
 \vspace{2em} \begin{center} 
 \textsc{Отчет по практикуму на ЭВМ \linebreak 
-\textbf{еботня какая-то}} \end{center}
+\textbf{}} \end{center}
 \vspace{6em} \newbox{\lbox} \savebox{\lbox}{\hbox{Д.Салахов}} 
 \newlength{\maxl} \setlength{\maxl}{\wd\lbox} \hfill\parbox{12	cm}
-{ \hspace*{10cm}\hspace*{-5cm}Студент 4 курса:\hfill\hbox to\maxl{Дамир}\\
-\hspace*{10cm}\hspace*{-5cm}Преподаватель:\hfill\hbox to\maxl{Ченцова}}\\  \vspace{\fill}
-\begin{center} Москва \\ 2017\end{center} \end{titlepage}
+{ \hspace*{10cm}\hspace*{-5cm}Студент 4 курса:\hfill\hbox to\maxl{Дамир Салахов}\\
+\hspace*{10cm}\hspace*{-5cm}Преподаватель:\hfill\hbox to\maxl{Ченцова Н.Н.}}\\  \vspace{\fill}
+\begin{center} Москва \\ 2018\end{center} \end{titlepage}
 
 %\maketitle
 
@@ -270,8 +270,127 @@ $$
 Заметим, в силу положительности второго слагаемого это неравенство всегда верно.
 Следовательно, данная схема устойчива.
 
+\section{Тестирование на известных условиях}
+\subsection{Условия} \label{easy}
+Чтобы проверить правильность реализованной схемы модифицируем изначальную систему:
+\begin{equation}
+\left\{
+	\begin{aligned}
+&\frac{\partial u}{\partial t} = \frac{\partial ^2 u}{\partial t^2} + u^3 + f \\
+& x = 0: \qquad \frac{\partial u}{\partial x} = 0\\
+& x = 1: \qquad u = 0 \\
+& f = 1.8 - u^3
+	\end{aligned}
+\right.
+\label{eq:1-nachal-zadacha}
+\end{equation}
+С известным начальным условием
+$$u |_{t=0} = 0.9 \cdot (1 - x^2)$$
+
+Заметим, что в таком случае решением будет являться $u = 0.9 \cdot (1 - x^2)$ -- параболоид.
+
+\subsection{Тестирование неявной схемы}
+При известном решении мы можем вычислить погрешность нашей схемы.
+В Приложении \ref{grap1} представлены графики для такого параболоида и невязки.
+Из этих графиков видно, что для каждого разбиения погрешность нарастает с увеличением номера итерации.
+
+Для осознания сходимости и правильности схемы приведем вычисленные нормы невязки.
+В следующих таблицах приведены нормы $\|\cdot \|_C$, $\|\cdot \|_{L_2}$, $\|\cdot \|_{v_1^2}$.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{$\|u - V \| _{C}$}\\ 
+\hline
+$\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\ 
+\hline
+0.010000 & 1.580672e-02 & 7.963878e-03 & 3.997309e-03 & 2.002528e-03 \\ 
+\hline
+0.002500 & 1.597577e-02 & 8.051159e-03 & 4.041659e-03 & 2.024882e-03 \\ 
+\hline
+0.000625 & 1.601862e-02 & 8.073291e-03 & 4.052908e-03 & 2.030553e-03 \\ 
+\hline
+0.000156 & 1.602937e-02 & 8.078843e-03 & 4.055730e-03 & 2.031976e-03 \\ 
+\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{$\|u - V \| _{L_2}$}\\ 
+\hline
+$\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\ 
+\hline
+0.010000 & 9.796435e-03 & 4.918536e-03 & 2.464433e-03 & 1.233518e-03 \\ 
+\hline
+0.002500 & 9.912456e-03 & 4.978151e-03 & 2.494652e-03 & 1.248732e-03 \\ 
+\hline
+0.000625 & 9.941862e-03 & 4.993269e-03 & 2.502317e-03 & 1.252592e-03 \\ 
+\hline
+0.000156 & 9.949239e-03 & 4.997062e-03 & 2.504241e-03 & 1.253560e-03 \\ 
+\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{$\|u - V \| _{v_2^1}$}\\ 
+\hline
+$\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\ 
+\hline
+0.010000 & 1.875896e-02 & 9.442011e-03 & 4.736889e-03 & 2.372447e-03 \\ 
+\hline
+0.002500 & 1.897098e-02 & 9.551257e-03 & 4.792344e-03 & 2.400386e-03 \\ 
+\hline
+0.000625 & 1.902473e-02 & 9.578968e-03 & 4.806415e-03 & 2.407476e-03 \\ 
+\hline
+0.000156 & 1.903821e-02 & 9.585920e-03 & 4.809945e-03 & 2.409255e-03 \\ 
+\hline
+\end{tabular}
+\end{center}
+
+Заметим, что при изменении разбиения по времени, погрешность почти не изменяется, что логично.
+Кроме того, при уменьшении шага сетки, во столько же раз уменьшается невязка.
+Таким образом, при увеличении $M$ мы добиваемся большей точности. 
+
+Строго говоря, сходимость схемы к решению не зависит от разбиения по времени, а имеет порядок  $o(h)$.
+
+
+
 \newpage
 \appendix \label{grap1}
+\section{Графики функции и невязки в условиях \ref{easy}}
+\begin{figure}[H]
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../u-res/lines10x10.jpg}} $N=10; M=10$ \\
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../res/lines10x10.jpg}} \textit{Невязка} \\
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../u-res/lines30x30.jpg}} $N=30; M=30$ \\
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../res/lines30x30.jpg}} \textit{Невязка} \\
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../u-res/lines150x150.jpg}} $N=150; M=150$ \\
+\end{minipage}
+\hfill
+\begin{minipage}[h]{0.43\linewidth}
+\center{\includegraphics[width=1\linewidth]{../res/lines150x150.jpg}} \textit{Невязка} \\
+\end{minipage}
+\end{figure}
+
+
 \section{Графики для $f=u^3$} 
 \begin{figure}[H]
 \begin{minipage}[h]{0.43\linewidth}
