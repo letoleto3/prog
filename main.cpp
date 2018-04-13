@@ -119,7 +119,7 @@ int main (int argc, char *argv[])
   fp_C_u  = fopen ("norm_C_u.txt", "r");
   fp_L2_u = fopen ("norm_L2_u.txt", "r");
   fp_21_u = fopen ("norm_21_u.txt", "r");
-  fp = fopen ("norms.tex", "w");
+  fp = fopen ("./report/norms.tex", "w");
   begin_print_norms (&fp);
   reprint_table (&fp_C_u, &fp);
   reprint_table (&fp_L2_u, &fp);
