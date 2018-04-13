@@ -1,5 +1,5 @@
 #include <time.h>
-#include "head.h"
+#include "functions.h"
 
 void my_sleep (double c)
 {
@@ -49,8 +49,9 @@ int main (int argc, char *argv[])
   int res;
   (void) res;
 
-  FILE *fp_u;
+  FILE *fp_u, *fp_res, *fp_u_res;
   const char *filename_u = "data_u.txt";
+  const char *filename_res = "data_res.txt";
   const char *filename_com = "gnuplot.txt";
 
   for (int i = 0; i < 6 * cnt; i++)
@@ -134,6 +135,7 @@ int main (int argc, char *argv[])
 
 #endif
 
+  double max = -1;
   init_task (&p_g);
   one_step (&p_g, &p_s, 1);
   h = p_s.h;
@@ -149,12 +151,18 @@ int main (int argc, char *argv[])
   int i;
 #if DRAW3D
   fp_u = fopen (filename_u, "w");
+  fp_res = fopen (filename_res, "w");
+  fp_u_res = fopen ("data_u-res.txt", "w");
 
   for (i = 0, x = 0; i <= M; i++, x += h)
     {
       fprintf (fp_u, "%e ", u[i]);
+      fprintf (fp_u_res, "%e ", u[i]);
+      fprintf (fp_res, "0 ");
     }
   fprintf (fp_u, "\n");
+  fprintf (fp_u_res, "\n");
+  fprintf (fp_res, "\n");
 #endif
 
 
@@ -165,8 +173,15 @@ int main (int argc, char *argv[])
       for (i = 0, x = 0; i <= M; i++, x += h)
         {
           fprintf (fp_u, "%e ", u[i]);
+          fprintf (fp_u_res, "%e ", u[i]);
+          double cur = fabs (u[i] - u_0 (x, t));
+          fprintf (fp_res, "%e ", cur);
+          if (cur > max)
+            max = cur;
         }
       fprintf (fp_u, "\n");
+      fprintf (fp_u_res, "\n");
+      fprintf (fp_res, "\n");
 #else
       fp_u = fopen (filename_u, "w");
       fprintf (fp_u, "X T Z\n");
@@ -187,10 +202,49 @@ int main (int argc, char *argv[])
 #if DRAW3D
   fprintf (fp_u, "\n");
   fclose (fp_u);
+#if RESIDUAL
+  fprintf (fp_res, "\n");
+  fclose (fp_res);
+  fprintf (fp_u_res, "\n");
+  fclose (fp_u_res);
+#endif
 #if COS
   draw ("u-cos", filename_com, it_t);
 #else
   draw ("u", filename_com, it_t);
+#if RESIDUAL
+  int pow = 0;
+  double deg = 1.;
+  int man = 0;
+  if (max >= 1)
+    {
+      while (max > deg)
+        {
+          deg *= 10;
+          pow++;
+        }
+      pow--;
+      deg /= 10;
+      while (man * deg < max)
+        {
+          man++;
+        }
+    }
+  else
+    {
+      while (max < deg)
+        {
+          deg /= 10;
+          pow--;
+        }
+      while (man * deg < max)
+        {
+          man++;
+        }
+    }
+  draw ("u-res", filename_com, it_t, deg * man);
+  draw ("res", filename_com, it_t, deg * man);
+#endif
 #endif
   my_sleep (1e-3);
 #endif

@@ -98,5 +98,5 @@ void begin_print_norms (FILE **fp);
 void reprint_table (FILE **from, FILE **to);
 void end_print_norms (FILE **fp);
 
-void draw (const char *parametr, const char *file_name, int it_t);
+void draw (const char *parametr, const char *file_name, int it_t, double max = 0);
 #endif // HEAD_H
