@@ -196,6 +196,7 @@ $$
 \frac{\tau}{h^2}  \leqslant \frac{1}{2} \label{usl0}
 \end{equation}
 
+Графики, подверждающие визуально, что схема расходится при определенных условиях на $\tau$ и $h$, приведены в Приложении \ref{grap2}
 \section{Описание неявной схемы схемы} \label{scheme}
 Для поиска численного решения задачи \ref{eq:1-nachal-zadacha} будем использовать разностную схему, в которой при аппроксимации членов используются односторонние разности:
 %\begin{aligned}
@@ -269,6 +270,8 @@ $$
 \end{equation}
 Заметим, в силу положительности второго слагаемого это неравенство всегда верно.
 Следовательно, данная схема устойчива.
+
+В Приложении \ref{grap3} и \ref{grap4} приведены графики для неявной схемы к нашей дифференциальной задаче.
 
 \section{Тестирование на известных условиях}
 \subsection{Условия} \label{easy}
@@ -358,8 +361,8 @@ $\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\
 
 
 \newpage
-\appendix \label{grap1}
 \section{Графики функции и невязки в условиях \ref{easy}}
+\appendix \label{grap1}
 \begin{figure}[H]
 \begin{minipage}[h]{0.43\linewidth}
 \center{\includegraphics[width=1\linewidth]{../u-res/lines10x10.jpg}} $N=10; M=10$ \\
@@ -391,7 +394,7 @@ $\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\
 \end{figure}
 
 
-\section{Графики для $f=u^3$} 
+\section{Графики для $f=u^3$} \label{grap3}
 \begin{figure}[H]
 \begin{minipage}[h]{0.43\linewidth}
 \center{\includegraphics[width=1\linewidth]{../u/lines5x5.jpg}} $N=5; M=5$ \\
@@ -423,7 +426,7 @@ $\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\
 \end{figure}
 
 
-\section{Графики для $f=u^3 - \cos \frac{\pi x}{2}$} 
+\section{Графики для $f=u^3 - \cos \frac{\pi x}{2}$}  \label{grap4}
 \begin{figure}[H]
 \begin{minipage}[h]{0.43\linewidth}
 \center{\includegraphics[width=1\linewidth]{../u-cos/lines5x5.jpg}} $N=5; M=5$ \\
@@ -454,7 +457,7 @@ $\tau \backslash h$ & 0.010000 & 0.005000 & 0.002500 & 0.001250 \\
 \end{minipage}
 \end{figure}
 
-\section{Графики для явной схемы для $f=u^3$}
+\section{Графики для явной схемы для $f=u^3$} \label{grap2}
 \begin{figure}[H]
 \begin{minipage}[h]{0.43\linewidth}
 \center{\includegraphics[width=1\linewidth]{../u/non-stab/lines2x8.jpg}} $N=8; M=2;$\\$\cfrac{\tau}{h^2} = \cfrac{1}{2}$ \\
