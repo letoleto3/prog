@@ -13,7 +13,7 @@
 
 #define EPS 10e-16
 
-#define RESIDUAL 1
+#define RESIDUAL 0
 
 struct task_parametrs
 {

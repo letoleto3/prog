@@ -76,18 +76,17 @@ void draw (const char *parametr, const char *file_name, int it_t, double max)
 
   fprintf (fp, "set xlabel 'x'\n");
   fprintf (fp, "set ylabel 't'\n");
-  fprintf (fp, "set zlabel 'u (x, t)'\n");
 
   fprintf (fp, "set xtics ('' 0, ''1)\n");
   fprintf (fp, "set ytics ('' 0, ''1)\n");
   if (!strcmp (parametr, "res"))
     {
-      fprintf (fp, "set isosample 10\n");
-      fprintf (fp, "set style line 2 lt 1 pt 6 ps 0.1\n");
+      fprintf (fp, "set ticslevel 0.\n");
       fprintf (fp, "splot 'data_%s.txt' matrix with lines linetype rgb'#FF0000' %c", parametr, '\0');
     }
   else
     {
+      fprintf (fp, "set zlabel 'u (x, t)'\n");
       fprintf (fp, "set ticslevel 0.8\n");
       fprintf (fp, "set palette defined (0 \"dark-turquoise\", 1 \"yellow\")\n");
 #if PM3D
@@ -95,8 +94,8 @@ void draw (const char *parametr, const char *file_name, int it_t, double max)
 #else
       fprintf (fp, "set pm3d at b\n");
       fprintf (fp, "splot 'data_%s.txt' matrix with lines %c", parametr, '\0');
-    }
 #endif
+    }
 #else
 #if SCHEME
   fprintf (fp, "set output '%s/u%d.jpg'\n", parametr, it_t);
@@ -113,7 +112,6 @@ void draw (const char *parametr, const char *file_name, int it_t, double max)
   sprintf (path_dest, "\"gnuplot\" %s%c\"", file_name,'\0');
   system (path_dest);
 }
-
 
 void calculate_u (task_parametrs *p_g, scheme_parametrs *p_s, double *val_u)
 {
